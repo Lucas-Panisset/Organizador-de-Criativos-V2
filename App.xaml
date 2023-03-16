@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Polozi_Criativo"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
         <Style x:Key="borderStyle" TargetType="{x:Type Border}">
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="BorderBrush" Value="#ff8303" />
@@ -59,7 +60,7 @@
 
         <Style x:Key="borderButton" TargetType="Border">
             <Setter Property="Width" Value="200" />
-            <Setter Property="Height" Value="75" />
+            <Setter Property="Height" Value="50" />
             <Setter Property="CornerRadius" Value="30" />
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center" />

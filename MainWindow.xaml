@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Polozi_Criativo"
+        xmlns:Icon ="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800"
+        Title="MainWindow" Height="325" Width="800"
         Background="Transparent"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -16,16 +17,21 @@
     <Border CornerRadius="30" Background="#333" MouseDown="Border_MouseDown">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="150"/>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <Border x:Name="minimizeButtonBorder" Style="{StaticResource borderCancelButton}" Grid.Row="0" HorizontalAlignment="Right" Background="#ebefec" Width="30" Height="30" Margin="0 0 50 0"  CornerRadius="10">
+                <Button x:Name="BtnMinimize" Style="{StaticResource cancelButton}" Content="-" FontSize="20" VerticalAlignment="Top" Click="MinimizeButton_Click" VerticalContentAlignment="Center" Foreground="#2e2e2e"/>
+            </Border>
 
-            <Border x:Name="cancelButtonBorder" Style="{StaticResource borderCancelButton}" Grid.Row="0" HorizontalAlignment="Right" Background="#ff291e" Width="30" Height="30"  CornerRadius="10">
+                <Border x:Name="cancelButtonBorder" Style="{StaticResource borderCancelButton}" Grid.Row="0" HorizontalAlignment="Right" Background="#ff291e" Width="30" Height="30"  CornerRadius="10">
                 <Button x:Name="BtnCancel" Style="{StaticResource cancelButton}" Content="x" FontSize="20" VerticalAlignment="Top" Click="CancelButton_Click" VerticalContentAlignment="Center" />
             </Border>
+            
+            
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Width="700">
                 <TextBlock Text="Insira o caminho da pasta de origem" VerticalAlignment="Center" Foreground="#ebefec" FontSize="22" HorizontalAlignment="Center" Margin="10" FontWeight="SemiBold"/>
@@ -67,15 +73,27 @@
 
 
             <Grid Grid.Row="3">
-                <Grid>
 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="150" />
+                </Grid.ColumnDefinitions>
 
+                <Button x:Name="spreadsheetSelector"  Width="52" Height="52" Background="Transparent" BorderThickness="0" Click="spreadsheetSelector_Click">
+                    <Icon:PackIconMaterial Kind="FileDocumentOutline" Width="40" Height="50" Margin="0"/>
+                </Button>
+
+                <Grid Grid.Column="1">
                     <Border Style="{StaticResource borderButton}" Grid.Column="1" Background="#2066fc">
                         <Button x:Name="BtnConfirm" Style="{StaticResource buttons}" Content="Confirmar" FontSize="30" Click="ConfirmButton_Click"/>
                     </Border>
-
                 </Grid>
-
+                
+                <Button x:Name="onlineSpreadsheetSelector" Grid.Column="2"  Width="52" Height="52"  Background="Transparent" BorderThickness="0">
+                    <Icon:PackIconMaterial Kind="web" Width="50" Height="50" Margin="0"/>
+                </Button>
+                
             </Grid>
 
         </Grid>

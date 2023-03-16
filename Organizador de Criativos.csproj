@@ -6,14 +6,15 @@
     <RootNamespace>Organizador_de_Criativos</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>image.ico</ApplicationIcon>
+    <ApplicationIcon>download.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="image.ico" />
+    <Content Include="download.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
   </ItemGroup>
 
