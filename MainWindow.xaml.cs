@@ -14,6 +14,8 @@ namespace Polozi_Criativo
     public partial class MainWindow : Window
     {
         string csvPath;
+        List<string> lista = new List<string>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -21,19 +23,9 @@ namespace Polozi_Criativo
             csvPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Organizador");
 
 
-            var lista = new List<string>();
+            spreadSheetSelector();
 
-            using (var stream = new FileStream(Path.Combine(csvPath, "standard.csv"), FileMode.OpenOrCreate))
-            {
-                using (var reader = new StreamReader(stream))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        lista.Add(line);
-                    }
-                }
-            }
+
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -84,6 +76,14 @@ namespace Polozi_Criativo
                 .Where(file => file.EndsWith(".jpg") || file.EndsWith(".png") || file.EndsWith(".bmp"))
                 .ToList();
 
+
+            var filepath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            if (!Directory.Exists(filepath))     
+            {
+                Directory.CreateDirectory(filepath);
+            
+            }
+
             // Iterate through each image file and move it to the corresponding subfolder in the destination path
             foreach (var imageFile in imageFiles)
             {
@@ -107,81 +107,17 @@ namespace Polozi_Criativo
                     }
 
                     var subfolder ="";
-                    switch (imageNumber)
+                    foreach(string line in lista)
                     {
-                        case 1:
-                        case 2:
-                            subfolder = "Alerta";
-                            break;
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                            subfolder = "Arco";
-                            break;
-                        case 7:
-                        case 8:
-                            subfolder = "Descritivo";
-                            break;
-                        case 9:
-                        case 10:
-                            subfolder = "Evento";
-                            break;
-                        case 11:
-                        case 12:
-                            subfolder = "Folha";
-                            break;
-                        case 13:
-                        case 14:
-                        case 15:
-                        case 16:
-                            subfolder = "Força";
-                            break;
-                        case 17:
-                        case 18:
-                            subfolder = "Janela";
-                            break;
-                        case 19:
-                        case 20:
-                        case 21:
-                        case 22:
-                            subfolder = "Masterclass";
-                            break;
-                        case 23:
-                        case 24:
-                            subfolder = "Mental";
-                            break;
-                        case 25:
-                        case 26:
-                            subfolder = "Padrão";
-                            break;
-                        case 27:
-                        case 28:
-                            subfolder = "Palestrante";
-                            break;
-                        case 29:
-                            subfolder = "Palestrante2";
-                            break;
-                        case 30:
-                        case 31:
-                        case 32:
-                            subfolder = "Pessoas";
-                            break;
-                        case 33:
-                        case 34:
-                            subfolder = "Plateia";
-                            break;
-                        case 35:
-                        case 36:
-                        case 37:
-                        case 38:
-                        case 39:
-                        case 40:
-                            subfolder = "Polozi";
-                            break;
-                        default:
-                            subfolder = "indefinidos";
-                            break;
+                        string[] dados = line.Split(';');
+                        int min = int.Parse(dados[0]);
+                        int max = int.Parse(dados[1]);
+                        string name = dados[2];
+                        if(imageNumber>= min && imageNumber<= max)
+                        {
+                            subfolder = name;
+                        }
+                        
                     }
 
 
@@ -216,8 +152,10 @@ namespace Polozi_Criativo
 
         private void spreadsheetSelector_Click(object sender, RoutedEventArgs e)
         {
-            var lista = new List<string>();
-
+            spreadSheetSelector();
+        }
+        private void spreadSheetSelector()
+        {
             using (var stream = new FileStream(Path.Combine(csvPath, "standard.csv"), FileMode.OpenOrCreate))
             {
                 using (var reader = new StreamReader(stream))
@@ -229,7 +167,6 @@ namespace Polozi_Criativo
                     }
                 }
             }
-
         }
     }
 }
